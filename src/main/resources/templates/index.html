@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<div>
+    <img src="/static/img_1.png">
+</div>
+<div th:switch="${toDos}">
+    <h2 th:case="null">No users yet!</h2>
+    <div th:case="*">
+        <h2>Users</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>CreatedAt</th>
+                <th>Edit</th>
+                <th>Delete</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="toDo : ${toDos}">
+                <td th:text="${toDo.id}"></td>
+                <td th:text="${toDo.title}"></td>
+                <td th:text="${toDo.priority}"></td>
+                <td th:text="${toDo.createdAt}"></td>
+                <td><a th:href="@{/edit/{id}(id=${toDo.id})}">Edit</a></td>
+                <td><a th:href="@{/delete/{id}(id=${toDo.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/begin">Add a new toDo</a></p>
+    <p><a href="/auth/logout">Chiqish</a></p>
+</div>
+</body>
+</html>
